@@ -7,7 +7,6 @@ const cors = require("cors");
 const mysql = require("./db");
 const { METHODS } = require("http");
 app.use(cors());
-
 const PORT = 5000;
 // Add this to where your other requires are
 const io = require("socket.io")(http, {
