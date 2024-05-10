@@ -7,6 +7,7 @@ let db_con = mysql.createConnection({
   database: "serengetiboard",
 });
 
+
 db_con.connect(function (err) {
   if (err) {
     console.error("Error connecting to MySQL database:", err);
