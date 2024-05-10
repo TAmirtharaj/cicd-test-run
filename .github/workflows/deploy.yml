@@ -1,0 +1,29 @@
+name: Node.js CI/CD
+
+on:
+  push:
+    branches:
+      - main  
+
+jobs:
+  deploy:
+    name: Deploy Node.js Application
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check Out Code
+        uses: actions/checkout@v2
+
+      - name: Install SSH Key
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Deploy to EC2
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
+          cd /home/ec2-user/cicd-test-run # Adjust to your application path on the EC2 instance
+          git pull origin main  # Adjust to the branch to deploy
+          npm install
+          pm2 restart cicd-test-run # Replace with your application's process manager (e.g., pm2, forever, or a custom script)
+          EOF
