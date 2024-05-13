@@ -27,7 +27,7 @@ jobs:
           echo "pulled"
           npm install
           echo "install done."
-          nohup node index.js
+          nohup node index.js > /dev/null 2>&1 &
           echo "Commands executed successfully."
           exit
           EOF
