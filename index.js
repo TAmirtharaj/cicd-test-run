@@ -110,7 +110,7 @@ app.post("/updateTime", async (request, response) => {
   );
 });
 
-app.get("/GetRoomData", (req, res) => {
+app.get("/GetRoomDataaaa", (req, res) => {
   mysql.query(
     `SELECT 
     x.room_name, 
