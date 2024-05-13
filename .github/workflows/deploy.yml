@@ -27,7 +27,7 @@ jobs:
           echo "pulled"
           npm install
           echo "install done."
-          npm restart serengetiboard_backend 
+          nohup node index.js
           echo "Commands executed successfully."
           exit
           EOF
