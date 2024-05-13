@@ -15,6 +15,7 @@ const io = require("socket.io")(http, {
     method: ["GET", "POST"],
   },
 });
+
 // Above our `app.get("/users")` handler
 
 io.on("connection", (socket) => {
