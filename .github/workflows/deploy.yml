@@ -23,6 +23,8 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
           cd /home/ec2-user/serengetiboard_backend # Adjust to your application path on the EC2 instance
+          npm stop
+          echo "Stopped existing runner"
           git pull origin main  # Adjust to the branch to deploy
           echo "pulled"
           npm install
