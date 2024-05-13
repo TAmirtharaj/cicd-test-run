@@ -25,5 +25,5 @@ jobs:
           cd /home/ec2-user/serengetiboard_backend # Adjust to your application path on the EC2 instance
           git pull origin main  # Adjust to the branch to deploy
           npm install
-          pm2 restart serengetiboard_backend # Replace with your application's process manager (e.g., pm2, forever, or a custom script)
+          npm restart serengetiboard_backend # Replace with your application's process manager (e.g., pm2, forever, or a custom script)
           EOF
