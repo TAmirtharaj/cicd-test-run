@@ -113,26 +113,29 @@ app.post("/updateTime", async (request, response) => {
 app.get("/GetRoomData", (req, res) => {
   mysql.query(
     `SELECT 
-    x.room_name, 
-    SUM(IF(y.agent_name IS NULL, 0, 1)) AS agent_count  
-FROM 
-    (SELECT r.name AS room_name FROM room AS r) AS x
-LEFT JOIN 
-    (SELECT ra.room_name, ra.agent_name FROM room_agent_animal AS ra WHERE ra.active = 1) AS y
-ON 
-    x.room_name = y.room_name
-GROUP BY 
-    x.room_name;
-`,
+      x.room_name, 
+      SUM(IF(y.agent_name IS NULL, 0, 1)) AS agent_count  
+    FROM 
+      (SELECT r.name AS room_name FROM room AS r) AS x
+    LEFT JOIN 
+      (SELECT ra.room_name, ra.agent_name FROM room_agent_animal AS ra WHERE ra.active = 1) AS y
+    ON 
+      x.room_name = y.room_name
+    GROUP BY 
+      x.room_name;`,
     (error, results, fields) => {
       if (error) {
-        res.status(500).json({ error: "Internal Server Error" });
+        console.error(error); // Log the detailed error
+        res
+          .status(500)
+          .json({ error: "Internal Server Error", details: error.message });
         return;
       }
       res.json(results);
     }
   );
 });
+
 
 app.post("/GetAgentName", (req, res) => {
   const { room_name } = req.body;
