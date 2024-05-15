@@ -74,6 +74,9 @@ app.post("/updatedAnimal", async (request, response) => {
   );
 });
 
+
+
+
 app.get("/CheckName", (req, res) => {
   const { agent_name, room_name } = req.query; // Accessing query parameters
   mysql.query(
